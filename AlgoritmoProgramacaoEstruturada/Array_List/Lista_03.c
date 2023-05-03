@@ -11,6 +11,7 @@ int main(){
     for(i=0 ; i<numero ; i++){
         printf("\nInforme o nome: ");
         scanf("%c", &vetorChar[i]);
+   
     }
 
     for(i=numero ; i>=0 ; i--){
