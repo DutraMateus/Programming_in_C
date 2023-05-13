@@ -33,3 +33,4 @@ int main(){
 
     printf("Quantidade: %d",contador);
 }
+// teste
