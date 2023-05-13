@@ -15,7 +15,7 @@ int main(){
         if(nBusca == vetor[i]){
             posicao[contador] = i;
             contador++;
-        }   
+        }  
     }
     
     for(i=0;i<contador;i++){
