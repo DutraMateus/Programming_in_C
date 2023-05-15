@@ -4,4 +4,9 @@
         "stdio.h": "c",
         "stdlib.h": "c"
     }
+    {
+        "files.associations": {
+            "string.h": "c"
+        }
+    }
 }
