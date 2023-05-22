@@ -1,9 +1,10 @@
-// Segunda etapa: editar usuarios
+// Terceira etapa: Excluir usuário //tentei mas não sei se deu certo
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
-int i = 0;
+int numUsuarios = 0;
 
 int idUser()
 {
@@ -12,7 +13,7 @@ int idUser()
 void Cadastro(char NomeCompleto[][40], char email[][30], char sexo[][10], char endereco[][50], double *altura, int vacina[], int id[])
 {
     printf("\nInforme o NOME do usuario: ");
-    fgets(NomeCompleto[i], 40, stdin);
+    fgets(NomeCompleto[numUsuarios], 40, stdin);
     fflush(stdin);
 
     getchar();
@@ -20,39 +21,39 @@ void Cadastro(char NomeCompleto[][40], char email[][30], char sexo[][10], char e
     do
     {
         printf("\nInforme o EMAIL do usuario: ");
-        fgets(email[i], 30, stdin);
+        fgets(email[numUsuarios], 30, stdin);
         fflush(stdin);
-    } while (strchr(email[i], '@') == 0);
+    } while (strchr(email[numUsuarios], '@') == 0);
 
     do
     {
         printf("\nInforme o SEXO do usuario: ");
-        fgets(sexo[i], 10, stdin);
+        fgets(sexo[numUsuarios], 10, stdin);
         fflush(stdin);
-    } while (strchr(sexo[i], 'feminino') != 0 && strchr(sexo[i], 'masculino') != 0 && strchr(sexo[i], 'outros') != 0);
+    } while (strchr(sexo[numUsuarios], 'feminino') == 0 && strchr(sexo[numUsuarios], 'masculino') == 0 && strchr(sexo[numUsuarios], 'outros') == 0);
 
     printf("\nInforme o ENDERECO do usuario: ");
-    fgets(endereco[i], 50, stdin);
+    fgets(endereco[numUsuarios], 50, stdin);
     fflush(stdin);
 
     do
     {
         printf("\nInforme o ALTURA(metros) do usuario: ");
-        scanf("%lf", &altura[i]);
+        scanf("%lf", &altura[numUsuarios]);
         fflush(stdin);
-    } while (altura[i] < 1 || altura[i] > 2);
+    } while (altura[numUsuarios] < 1 || altura[numUsuarios] > 2);
 
     do
     {
         printf("\nInfome se o usuario foi ou nao VACINADO(1 - sim) (0 - nao): ");
-        scanf("%d", &vacina[i]);
+        scanf("%d", &vacina[numUsuarios]);
         fflush(stdin);
-    } while (vacina[i] != 1 && vacina[i] != 0);
+    } while (vacina[numUsuarios] != 1 && vacina[numUsuarios] != 0);
 
-    id[i] = idUser();
-    printf("\nUsuario criado com id: %d", id[i]);
+    id[numUsuarios] = idUser();
+    printf("\nUsuario criado com id: %d", id[numUsuarios]);
 
-    i++;
+    numUsuarios++;
 
     return 1;
 }
@@ -65,9 +66,9 @@ void EditarCadastro(char NomeCompleto[][40], char email[][30], char sexo[][10], 
     fflush(stdin);
     int index;
 
-    for (i = 0; i < 1000; i++)
+    for (int i = 0; i < 1000; i++)
     {
-        if (id[i] == idProcurar)
+        if (id[numUsuarios] == idProcurar)
         {
             index = i;
             break;
@@ -108,6 +109,51 @@ void EditarCadastro(char NomeCompleto[][40], char email[][30], char sexo[][10], 
     }
     return 1;
 }
+void ExcluirUsuario(char NomeCompleto[][40], char email[][30], char sexo[][10], char endereco[][50], double *altura, int vacina[], int id[])
+{
+    int idProcurar;
+    bool encontrar = false;
+
+    printf("\nInforme o id do usuario que deseja remover:\n");
+    scanf("%d", &idProcurar);
+
+    for (int i = 0; i < numUsuarios; i++)
+    {
+        if (idProcurar == id[i])
+        {
+            encontrar = true;
+            break;
+        }
+    }
+    if (!encontrar)
+    {
+        printf("Usuario %d nao encontrado.\n", idProcurar);
+        return 1;
+    }
+    for (int j = 0; j < numUsuarios; j++)
+    {
+        strcpy(NomeCompleto[j], NomeCompleto[j + 1]);
+        strcpy(email[j], email[j + 1]);
+        strcpy(sexo[j], sexo[j + 1]);
+        strcpy(endereco[j], endereco[j + 1]);
+        altura[j] = altura[j + 1];
+        vacina[j] = vacina[j + 1];
+        id[j] = id[j + 1];
+    }
+    strcpy(NomeCompleto[numUsuarios - 1], "");
+    strcpy(email[numUsuarios - 1], "");
+    strcpy(sexo[numUsuarios - 1], "");
+    strcpy(endereco[numUsuarios - 1], "");
+    altura[numUsuarios - 1] = 0.0;
+    vacina[numUsuarios - 1] = 0;
+    id[numUsuarios - 1] = 0;
+
+    numUsuarios--;
+
+    printf("Usuario %d excluido!\n", idProcurar);
+
+    return 1;
+}
 
 int main()
 {
@@ -119,8 +165,8 @@ int main()
     do
     {
 
-        printf("\tSeja bem vindo!\n\n");
-        printf("\nInforme o que deseja realizar no programa:\n\n1 - Incluir usuarios\n2 - Editar usuarios\n");
+        printf("\tSeja bem vindo ao menu!\n\n");
+        printf("\nInforme o que deseja realizar no programa:\n\n1 - Incluir usuarios\n2 - Editar usuarios\n3 - Excluir usuario\n");
         scanf("%d", &opcao);
         switch (opcao)
         {
@@ -129,6 +175,9 @@ int main()
             break;
         case 2:
             EditarCadastro(NomeCompleto, email, sexo, endereco, altura, vacina, id);
+            break;
+        case 3:
+            ExcluirUsuario(NomeCompleto, email, sexo, endereco, altura, vacina, id);
             break;
         }
     } while (continuar);
