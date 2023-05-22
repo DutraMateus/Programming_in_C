@@ -1,4 +1,4 @@
-// Terceira etapa: Excluir usuário //tentei mas não sei se deu certo
+// Quarta etapa: busque usuario pelo email //dando erro para printar os dados do usuario
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -51,7 +51,7 @@ void Cadastro(char NomeCompleto[][40], char email[][30], char sexo[][10], char e
     } while (vacina[numUsuarios] != 1 && vacina[numUsuarios] != 0);
 
     id[numUsuarios] = idUser();
-    printf("\nUsuario criado com id: %d", id[numUsuarios]);
+    printf("\nUsuario criado com id: %d\n\n", id[numUsuarios]);
 
     numUsuarios++;
 
@@ -154,6 +154,37 @@ void ExcluirUsuario(char NomeCompleto[][40], char email[][30], char sexo[][10], 
 
     return 1;
 }
+void BuscaEmail(char NomeCompleto[][40], char email[][30], char sexo[][10], char endereco[][50], double *altura, int vacina[], int id[])
+{
+
+    char emailBusca[30];
+    int index = -1;
+
+    printf("\nInforme o email do usuario que deseja encontrar:\n");
+    scanf("%s", &emailBusca);
+
+    for (int i = 0; i < numUsuarios; i++)
+    {
+        if (strcmp(emailBusca, email[i]) == 0)
+        {
+            index = i;
+            break;
+        }
+    }
+    if (index != -1)
+    {
+        printf("Nome completo: %s", NomeCompleto[index]);
+        printf("Email: %s", email[index]);
+        printf("Sexo: %s", sexo[index]);
+        printf("Endereco: %s", endereco[index]);
+        printf("Altura: %.2lf", altura[index]);
+        printf("Vacina: %d", vacina[index]);
+    }
+    else
+    {
+        printf("\nUsuario com o email %s nao encontrado.\n", emailBusca);
+    }
+}
 
 int main()
 {
@@ -166,7 +197,7 @@ int main()
     {
 
         printf("\tSeja bem vindo ao menu!\n\n");
-        printf("\nInforme o que deseja realizar no programa:\n\n1 - Incluir usuarios\n2 - Editar usuarios\n3 - Excluir usuario\n");
+        printf("\nInforme o que deseja realizar no programa:\n\n1 - Incluir usuarios\n2 - Editar usuarios\n3 - Excluir usuario\n4 - Econtrar usuario pelo email\n\n");
         scanf("%d", &opcao);
         switch (opcao)
         {
@@ -178,6 +209,9 @@ int main()
             break;
         case 3:
             ExcluirUsuario(NomeCompleto, email, sexo, endereco, altura, vacina, id);
+            break;
+        case 4:
+            BuscaEmail(NomeCompleto, email, sexo, endereco, altura, vacina, id);
             break;
         }
     } while (continuar);
