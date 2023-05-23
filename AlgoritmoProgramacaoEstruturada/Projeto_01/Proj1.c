@@ -1,4 +1,7 @@
-// Quarta etapa: busque usuario pelo email //dando erro para printar os dados do usuario
+/*Quarta etapa: busque usuario pelo email.
+Apos inúmeras tentativas, falhei. Não consigo identificar o erro.
+Tentei utilizar o Chat GPT para me auxiliar a entender meu erro, mas nem mesmo as suas soluções funcionaram. Não consigo imprimir os dados do usuario*/
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -66,7 +69,7 @@ void EditarCadastro(char NomeCompleto[][40], char email[][30], char sexo[][10], 
     fflush(stdin);
     int index;
 
-    for (int i = 0; i < 1000; i++)
+    for (int i = 0; i < numUsuarios; i++)
     {
         if (id[numUsuarios] == idProcurar)
         {
@@ -156,12 +159,14 @@ void ExcluirUsuario(char NomeCompleto[][40], char email[][30], char sexo[][10], 
 }
 void BuscaEmail(char NomeCompleto[][40], char email[][30], char sexo[][10], char endereco[][50], double *altura, int vacina[], int id[])
 {
-
     char emailBusca[30];
     int index = -1;
 
     printf("\nInforme o email do usuario que deseja encontrar:\n");
-    scanf("%s", &emailBusca);
+    fgets(emailBusca, 30, stdin);
+    fflush(stdin);
+
+    getchar();
 
     for (int i = 0; i < numUsuarios; i++)
     {
@@ -171,21 +176,22 @@ void BuscaEmail(char NomeCompleto[][40], char email[][30], char sexo[][10], char
             break;
         }
     }
+
     if (index != -1)
     {
-        printf("Nome completo: %s", NomeCompleto[index]);
-        printf("Email: %s", email[index]);
-        printf("Sexo: %s", sexo[index]);
-        printf("Endereco: %s", endereco[index]);
-        printf("Altura: %.2lf", altura[index]);
-        printf("Vacina: %d", vacina[index]);
+        printf("\nDados do usuario encontrado:\n");
+        printf("Nome completo: %s\n", NomeCompleto[index]);
+        printf("Email: %s\n", email[index]);
+        printf("Sexo: %s\n", sexo[index]);
+        printf("Endereco: %s\n", endereco[index]);
+        printf("Altura: %.2lf\n", altura[index]);
+        printf("Vacina: %d\n", vacina[index]);
     }
     else
     {
         printf("\nUsuario com o email %s nao encontrado.\n", emailBusca);
     }
 }
-
 int main()
 {
     srand(time(NULL));

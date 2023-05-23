@@ -1,4 +1,3 @@
-// Quarta etapa: busque usuario pelo email //dando erro para printar os dados do usuario
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -154,14 +153,14 @@ void ExcluirUsuario(char NomeCompleto[][40], char email[][30], char sexo[][10], 
 
     return 1;
 }
-void BuscaEmail(char NomeCompleto[][40], char email[][30], char sexo[][10], char endereco[][50], double *altura, int vacina[], int id[])
+void BuscaEmail(char NomeCompleto[][40], char email[][30], char sexo[][10], char endereco[][50], double altura[], int vacina[], int id[], int numUsuarios)
 {
-
     char emailBusca[30];
     int index = -1;
 
-    printf("\nInforme o email do usuario que deseja encontrar:\n");
-    scanf("%s", &emailBusca);
+    printf("\nInforme o email do usuário que deseja encontrar:\n");
+    fgets(emailBusca, 30, stdin);
+    emailBusca[strcspn(emailBusca, "\n")] = '\0';
 
     for (int i = 0; i < numUsuarios; i++)
     {
@@ -171,18 +170,20 @@ void BuscaEmail(char NomeCompleto[][40], char email[][30], char sexo[][10], char
             break;
         }
     }
+
     if (index != -1)
     {
-        printf("Nome completo: %s", NomeCompleto[index]);
-        printf("Email: %s", email[index]);
-        printf("Sexo: %s", sexo[index]);
-        printf("Endereco: %s", endereco[index]);
-        printf("Altura: %.2lf", altura[index]);
-        printf("Vacina: %d", vacina[index]);
+        printf("\nDados do usuário encontrado:\n");
+        printf("Nome completo: %s\n", NomeCompleto[index]);
+        printf("Email: %s\n", email[index]);
+        printf("Sexo: %s\n", sexo[index]);
+        printf("Endereço: %s\n", endereco[index]);
+        printf("Altura: %.2lf\n", altura[index]);
+        printf("Vacina: %d\n", vacina[index]);
     }
     else
     {
-        printf("\nUsuario com o email %s nao encontrado.\n", emailBusca);
+        printf("\nUsuário com o email %s não encontrado.\n", emailBusca);
     }
 }
 
