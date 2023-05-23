@@ -1,6 +1,5 @@
-/*Quarta etapa: busque usuario pelo email.
-Apos inúmeras tentativas, falhei. Não consigo identificar o erro.
-Tentei utilizar o Chat GPT para me auxiliar a entender meu erro, mas nem mesmo as suas soluções funcionaram. Não consigo imprimir os dados do usuario*/
+// Quinta etapa: imprima todos os usuários cadastrados
+/*Está dando erro, vou seguir com as etapas e volto corrigindo*/
 
 #include <stdio.h>
 #include <string.h>
@@ -192,6 +191,14 @@ void BuscaEmail(char NomeCompleto[][40], char email[][30], char sexo[][10], char
         printf("\nUsuario com o email %s nao encontrado.\n", emailBusca);
     }
 }
+// void ImprimirUsuarios(char NomeCompleto[][40], char email[][30], char sexo[][10], char endereco[][50], double *altura, int vacina[], int id[]){
+
+//     int usuarios;
+
+//     for(int i=0; i<numUsuarios; i++){
+
+//     }
+// }
 int main()
 {
     srand(time(NULL));
@@ -203,7 +210,7 @@ int main()
     {
 
         printf("\tSeja bem vindo ao menu!\n\n");
-        printf("\nInforme o que deseja realizar no programa:\n\n1 - Incluir usuarios\n2 - Editar usuarios\n3 - Excluir usuario\n4 - Econtrar usuario pelo email\n\n");
+        printf("\nInforme o que deseja realizar no programa:\n\n1 - Incluir usuarios\n2 - Editar usuarios\n3 - Excluir usuario\n4 - Econtrar usuario pelo email\n5 - Apresentar usuarios\n\n");
         scanf("%d", &opcao);
         switch (opcao)
         {
@@ -219,7 +226,11 @@ int main()
         case 4:
             BuscaEmail(NomeCompleto, email, sexo, endereco, altura, vacina, id);
             break;
+            // case 5:
+            //     ImprimirUsuarios(NomeCompleto, email, sexo, endereco, altura, vacina, id);
+            //     break;
         }
+
     } while (continuar);
     return 0;
 }

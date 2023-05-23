@@ -1,4 +1,4 @@
-//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH
+// sou brasileiro, não desisto nuncaaa, vou descobrir como corrigir essa p@@@@
 
 #include <stdio.h>
 #include <string.h>
@@ -11,10 +11,15 @@ int idUser()
 {
     return rand();
 }
+
 void Cadastro(char NomeCompleto[][40], char email[][30], char sexo[][10], char endereco[][50], double *altura, int vacina[], int id[])
 {
+
+        numUsuarios++;
+    
+
     printf("\nInforme o NOME do usuario: ");
-    fgets(NomeCompleto[numUsuarios], 40, stdin);
+    fgets(NomeCompleto[numUsuarios-1], 40, stdin);
     fflush(stdin);
 
     getchar();
@@ -22,37 +27,37 @@ void Cadastro(char NomeCompleto[][40], char email[][30], char sexo[][10], char e
     do
     {
         printf("\nInforme o EMAIL do usuario: ");
-        fgets(email[numUsuarios], 30, stdin);
+        fgets(email[numUsuarios-1], 30, stdin);
         fflush(stdin);
-    } while (strchr(email[numUsuarios], '@') == 0);
+    } while (strchr(email[numUsuarios-1], '@') == 0);
 
     do
     {
         printf("\nInforme o SEXO do usuario: ");
-        fgets(sexo[numUsuarios], 10, stdin);
+        fgets(sexo[numUsuarios-1], 10, stdin);
         fflush(stdin);
-    } while (strchr(sexo[numUsuarios], 'feminino') == 0 && strchr(sexo[numUsuarios], 'masculino') == 0 && strchr(sexo[numUsuarios], 'outros') == 0);
+    } while (strchr(sexo[numUsuarios-1], 'feminino') == 0 && strchr(sexo[numUsuarios-1], 'masculino') == 0 && strchr(sexo[numUsuarios-1], 'outros') == 0);
 
     printf("\nInforme o ENDERECO do usuario: ");
-    fgets(endereco[numUsuarios], 50, stdin);
+    fgets(endereco[numUsuarios-1], 50, stdin);
     fflush(stdin);
 
     do
     {
         printf("\nInforme o ALTURA(metros) do usuario: ");
-        scanf("%lf", &altura[numUsuarios]);
+        scanf("%lf", &altura[numUsuarios-1]);
         fflush(stdin);
-    } while (altura[numUsuarios] < 1 || altura[numUsuarios] > 2);
+    } while (altura[numUsuarios-1] < 1 || altura[numUsuarios-1] > 2);
 
     do
     {
         printf("\nInfome se o usuario foi ou nao VACINADO(1 - sim) (0 - nao): ");
-        scanf("%d", &vacina[numUsuarios]);
+        scanf("%d", &vacina[numUsuarios-1]);
         fflush(stdin);
-    } while (vacina[numUsuarios] != 1 && vacina[numUsuarios] != 0);
+    } while (vacina[numUsuarios-1] != 1 && vacina[numUsuarios-1] != 0);
 
-    id[numUsuarios] = idUser();
-    printf("\nUsuario criado com id: %d\n\n", id[numUsuarios]);
+    id[numUsuarios-1] = idUser();
+    printf("\nUsuario criado com id: %d\n\n", id[numUsuarios-1]);
 
     numUsuarios++;
 
@@ -67,7 +72,7 @@ void EditarCadastro(char NomeCompleto[][40], char email[][30], char sexo[][10], 
     fflush(stdin);
     int index;
 
-    for (int i = 0; i < 1000; i++)
+    for (int i = 0; i < numUsuarios; i++)
     {
         if (id[numUsuarios] == idProcurar)
         {
@@ -155,43 +160,55 @@ void ExcluirUsuario(char NomeCompleto[][40], char email[][30], char sexo[][10], 
 
     return 1;
 }
-void BuscaEmail(char NomeCompleto[][40], char email[][30], char sexo[][10], char endereco[][50], double altura[], int vacina[], int id[], int numUsuarios)
+void BuscaEmail(char NomeCompleto[][40], char email[][30], char sexo[][10], char endereco[][50], double *altura, int vacina[], int id[])
 {
     char emailBusca[30];
-    int index = -1;
+    int index = 1;
 
-    printf("\nInforme o email do usuário que deseja encontrar:\n");
-    fgets(emailBusca, 30, stdin);
-    emailBusca[strcspn(emailBusca, "\n")] = '\0';
+    printf("\nInforme o email do usuario que deseja encontrar:\n");
+    scanf("%s", &emailBusca);
+    fflush(stdin);
+
+    getchar();
 
     for (int i = 0; i < numUsuarios; i++)
     {
         if (strcmp(emailBusca, email[i]) == 0)
         {
-            index = i;
-            break;
+            printf("\nDados do usuario encontrado:\n");
+            printf("Nome completo: %s\n", NomeCompleto[i]);
+            printf("Email: %s\n", email[i]);
+            printf("Sexo: %s\n", sexo[i]);
+            printf("Endereco: %s\n", endereco[i]);
+            printf("Altura: %.2lf\n", altura[i]);
+            printf("Vacina: %d\n", vacina[i]);
+        }
+        else
+        {
+            printf("\nUsuario com o email %s nao encontrado.\n", emailBusca);
         }
     }
+}
+void ImprimirUsuarios(char NomeCompleto[][40], char email[][30], char sexo[][10], char endereco[][50], double *altura, int vacina[], int id[])
+{
 
-    if (index != -1)
+    int usuarios;
+
+    for (int i = 0; i < numUsuarios; i++)
     {
-        printf("\nDados do usuário encontrado:\n");
-        printf("Nome completo: %s\n", NomeCompleto[index]);
-        printf("Email: %s\n", email[index]);
-        printf("Sexo: %s\n", sexo[index]);
-        printf("Endereço: %s\n", endereco[index]);
-        printf("Altura: %.2lf\n", altura[index]);
-        printf("Vacina: %d\n", vacina[index]);
-    }
-    else
-    {
-        printf("\nUsuário com o email %s não encontrado.\n", emailBusca);
+        printf("\nUsuario: %d\n", id[i]);
+        printf("\nNome completo: %s", NomeCompleto[i]);
+        printf("\nEmail: %s", email[i]);
+        printf("\nSexo: %s", sexo[i]);
+        printf("\nEndereco: %s", endereco[i]);
+        printf("\nAltura: %.2lf\n", altura[i]);
+        printf("\nVacina: %s\n", vacina[i]);
     }
 }
-
 int main()
 {
     srand(time(NULL));
+
     char NomeCompleto[1000][40], email[1000][30], sexo[1000][10], endereco[1000][50];
     int vacina[1000], id[1000], opcao, continuar;
     double altura[1000];
@@ -200,7 +217,7 @@ int main()
     {
 
         printf("\tSeja bem vindo ao menu!\n\n");
-        printf("\nInforme o que deseja realizar no programa:\n\n1 - Incluir usuarios\n2 - Editar usuarios\n3 - Excluir usuario\n4 - Econtrar usuario pelo email\n\n");
+        printf("\nInforme o que deseja realizar no programa:\n\n1 - Incluir usuarios\n2 - Editar usuarios\n3 - Excluir usuario\n4 - Econtrar usuario pelo email\n5 - Apresentar usuarios\n\n");
         scanf("%d", &opcao);
         switch (opcao)
         {
@@ -216,7 +233,11 @@ int main()
         case 4:
             BuscaEmail(NomeCompleto, email, sexo, endereco, altura, vacina, id);
             break;
+        case 5:
+            ImprimirUsuarios(NomeCompleto, email, sexo, endereco, altura, vacina, id);
+            break;
         }
+
     } while (continuar);
     return 0;
 }
