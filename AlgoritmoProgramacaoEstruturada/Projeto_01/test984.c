@@ -15,11 +15,10 @@ int idUser()
 void Cadastro(char NomeCompleto[][40], char email[][30], char sexo[][10], char endereco[][50], double *altura, int vacina[], int id[])
 {
 
-        numUsuarios++;
-    
+    numUsuarios++;
 
     printf("\nInforme o NOME do usuario: ");
-    fgets(NomeCompleto[numUsuarios-1], 40, stdin);
+    fgets(NomeCompleto[numUsuarios - 1], 40, stdin);
     fflush(stdin);
 
     getchar();
@@ -27,37 +26,37 @@ void Cadastro(char NomeCompleto[][40], char email[][30], char sexo[][10], char e
     do
     {
         printf("\nInforme o EMAIL do usuario: ");
-        fgets(email[numUsuarios-1], 30, stdin);
+        fgets(email[numUsuarios - 1], 30, stdin);
         fflush(stdin);
-    } while (strchr(email[numUsuarios-1], '@') == 0);
+    } while (strchr(email[numUsuarios - 1], '@') == 0);
 
     do
     {
         printf("\nInforme o SEXO do usuario: ");
-        fgets(sexo[numUsuarios-1], 10, stdin);
+        fgets(sexo[numUsuarios - 1], 10, stdin);
         fflush(stdin);
-    } while (strchr(sexo[numUsuarios-1], 'feminino') == 0 && strchr(sexo[numUsuarios-1], 'masculino') == 0 && strchr(sexo[numUsuarios-1], 'outros') == 0);
+    } while (strchr(sexo[numUsuarios - 1], 'feminino') == 0 && strchr(sexo[numUsuarios - 1], 'masculino') == 0 && strchr(sexo[numUsuarios - 1], 'outros') == 0);
 
     printf("\nInforme o ENDERECO do usuario: ");
-    fgets(endereco[numUsuarios-1], 50, stdin);
+    fgets(endereco[numUsuarios - 1], 50, stdin);
     fflush(stdin);
 
     do
     {
         printf("\nInforme o ALTURA(metros) do usuario: ");
-        scanf("%lf", &altura[numUsuarios-1]);
+        scanf("%lf", &altura[numUsuarios - 1]);
         fflush(stdin);
-    } while (altura[numUsuarios-1] < 1 || altura[numUsuarios-1] > 2);
+    } while (altura[numUsuarios - 1] < 1 || altura[numUsuarios - 1] > 2);
 
     do
     {
         printf("\nInfome se o usuario foi ou nao VACINADO(1 - sim) (0 - nao): ");
-        scanf("%d", &vacina[numUsuarios-1]);
+        scanf("%d", &vacina[numUsuarios - 1]);
         fflush(stdin);
-    } while (vacina[numUsuarios-1] != 1 && vacina[numUsuarios-1] != 0);
+    } while (vacina[numUsuarios - 1] != 1 && vacina[numUsuarios - 1] != 0);
 
-    id[numUsuarios-1] = idUser();
-    printf("\nUsuario criado com id: %d\n\n", id[numUsuarios-1]);
+    id[numUsuarios - 1] = idUser();
+    printf("\nUsuario criado com id: %d\n\n", id[numUsuarios - 1]);
 
     numUsuarios++;
 
@@ -202,7 +201,7 @@ void ImprimirUsuarios(char NomeCompleto[][40], char email[][30], char sexo[][10]
         printf("\nSexo: %s", sexo[i]);
         printf("\nEndereco: %s", endereco[i]);
         printf("\nAltura: %.2lf\n", altura[i]);
-        printf("\nVacina: %s\n", vacina[i]);
+        printf("\nVacina: %d\n", vacina[i]);
     }
 }
 int main()

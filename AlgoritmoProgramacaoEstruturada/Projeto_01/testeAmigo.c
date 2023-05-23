@@ -1,5 +1,4 @@
-// Setima etapa: Restauração dos dados dos usuarios
-/*Adicionei algumas correcoes do que pude observar. Para não me perder, alterei alguns nomes também*/
+/*também nao funcionou buscaemail e imprimirusuarios (nao imprime o nome)*/
 
 #include <stdio.h>
 #include <string.h>
@@ -156,7 +155,6 @@ void ExcluirUsuario(char NomeCompleto[][40], char email[][30], char sexo[][10], 
 
     return 1;
 }
-// erro
 void BuscaEmail(char NomeCompleto[][40], char email[][30], char sexo[][10], char endereco[][50], double *altura, int vacina[], int id[])
 {
     char emailBusca[30];
@@ -165,8 +163,6 @@ void BuscaEmail(char NomeCompleto[][40], char email[][30], char sexo[][10], char
     printf("\nInforme o email do usuario que deseja encontrar:\n");
     fgets(emailBusca, 30, stdin);
     fflush(stdin);
-
-    getchar();
 
     for (int i = 0; i < numUsuarios; i++)
     {
@@ -180,10 +176,10 @@ void BuscaEmail(char NomeCompleto[][40], char email[][30], char sexo[][10], char
     if (index != -1)
     {
         printf("\nDados do usuario encontrado:\n");
-        printf("Nome completo: %s\n", NomeCompleto[index]);
-        printf("Email: %s\n", email[index]);
-        printf("Sexo: %s\n", sexo[index]);
-        printf("Endereco: %s\n", endereco[index]);
+        printf("Nome completo: %s", NomeCompleto[index]);
+        printf("Email: %s", email[index]);
+        printf("Sexo: %s", sexo[index]);
+        printf("Endereco: %s", endereco[index]);
         printf("Altura: %.2lf\n", altura[index]);
         printf("Vacina: %d\n", vacina[index]);
     }
@@ -191,28 +187,22 @@ void BuscaEmail(char NomeCompleto[][40], char email[][30], char sexo[][10], char
     {
         printf("\nUsuario com o email %s nao encontrado.\n", emailBusca);
     }
-
-    return 1;
 }
-// erro
+
 void ImprimirUsuarios(char NomeCompleto[][40], char email[][30], char sexo[][10], char endereco[][50], double *altura, int vacina[], int id[])
 {
-
-    int usuarios;
-
     for (int i = 0; i < numUsuarios; i++)
     {
         printf("\nUsuario: %d\n", id[i]);
         printf("\nNome completo: %s", NomeCompleto[i]);
-        printf("\nEmail: %s", email[i]);
-        printf("\nSexo: %s", sexo[i]);
-        printf("\nEndereco: %s", endereco[i]);
-        printf("\nAltura: %.2lf\n", altura[i]);
-        printf("\nVacina: %d\n", vacina[i]);
+        printf("Email: %s", email[i]);
+        printf("Sexo: %s", sexo[i]);
+        printf("Endereco: %s", endereco[i]);
+        printf("Altura: %.2lf\n", altura[i]);
+        printf("Vacina: %d\n", vacina[i]);
     }
-
-    return 1;
 }
+
 void BackupUsuario(char NomeCompleto[][40], char email[][30], char sexo[][10], char endereco[][50], double *altura, int vacina[], int id[], char backupNomeCompleto[][40], char backupEmail[][30], char backupSexo[][10], char backupEndereco[][50], double *backupAltura, int backupVacina[])
 {
 
