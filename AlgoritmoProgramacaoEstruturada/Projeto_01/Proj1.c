@@ -1,5 +1,5 @@
-// Quinta etapa: imprima todos os usuários cadastrados
-/*Está dando erro, vou seguir com as etapas e volto corrigindo*/
+//Sexta etapa: Backup dos usuarios
+/*Ao que tudo indica deu certo*/
 
 #include <stdio.h>
 #include <string.h>
@@ -156,6 +156,7 @@ void ExcluirUsuario(char NomeCompleto[][40], char email[][30], char sexo[][10], 
 
     return 1;
 }
+// erro
 void BuscaEmail(char NomeCompleto[][40], char email[][30], char sexo[][10], char endereco[][50], double *altura, int vacina[], int id[])
 {
     char emailBusca[30];
@@ -191,26 +192,49 @@ void BuscaEmail(char NomeCompleto[][40], char email[][30], char sexo[][10], char
         printf("\nUsuario com o email %s nao encontrado.\n", emailBusca);
     }
 }
-// void ImprimirUsuarios(char NomeCompleto[][40], char email[][30], char sexo[][10], char endereco[][50], double *altura, int vacina[], int id[]){
+// erro
+void ImprimirUsuarios(char NomeCompleto[][40], char email[][30], char sexo[][10], char endereco[][50], double *altura, int vacina[], int id[])
+{
 
-//     int usuarios;
+    int usuarios;
 
-//     for(int i=0; i<numUsuarios; i++){
+    for (int i = 0; i < numUsuarios; i++)
+    {
+        printf("\nUsuario: %d\n", id[i]);
+        printf("\nNome completo: %s", NomeCompleto[i]);
+        printf("\nEmail: %s", email[i]);
+        printf("\nSexo: %s", sexo[i]);
+        printf("\nEndereco: %s", endereco[i]);
+        printf("\nAltura: %.2lf\n", altura[i]);
+        printf("\nVacina: %s\n", vacina[i]);
+    }
+}
+void BackupUsuario(char NomeCompleto[][40], char email[][30], char sexo[][10], char endereco[][50], double *altura, int vacina[], int id[], char backupNomeCompleto[][40], char backupEmail[][30], char backupSexo[][10], char backupEndereco[][50], double *backupAltura, int backupVacina[])
+{
 
-//     }
-// }
+    for (int i = 0; i < numUsuarios; i++)
+    {
+        strcpy(backupNomeCompleto[numUsuarios], NomeCompleto[numUsuarios]);
+        strcpy(backupEmail[numUsuarios], email[numUsuarios]);
+        strcpy(backupSexo[numUsuarios], sexo[numUsuarios]);
+        strcpy(backupEndereco[numUsuarios], endereco[numUsuarios]);
+        backupAltura[i] = altura[i];
+        backupVacina[i] = vacina[i];
+    }
+    printf("\nBackup concluido!:)\n\n");
+}
 int main()
 {
     srand(time(NULL));
-    char NomeCompleto[1000][40], email[1000][30], sexo[1000][10], endereco[1000][50];
-    int vacina[1000], id[1000], opcao, continuar;
-    double altura[1000];
+    char NomeCompleto[1000][40], email[1000][30], sexo[1000][10], endereco[1000][50], backupNomeCompleto[1000][40], backupEmail[1000][30], backupSexo[1000][10], backupEndereco[1000][50];
+    int vacina[1000], id[1000], opcao, continuar, backupVacina[1000];
+    double altura[1000], backupAltura[1000];
 
     do
     {
 
         printf("\tSeja bem vindo ao menu!\n\n");
-        printf("\nInforme o que deseja realizar no programa:\n\n1 - Incluir usuarios\n2 - Editar usuarios\n3 - Excluir usuario\n4 - Econtrar usuario pelo email\n5 - Apresentar usuarios\n\n");
+        printf("\nInforme o que deseja realizar no programa:\n\n1 - Incluir usuarios\n2 - Editar usuarios\n3 - Excluir usuario\n4 - Econtrar usuario pelo email\n5 - Apresentar usuarios\n6 - Fazer backup dos usuarios\n\n");
         scanf("%d", &opcao);
         switch (opcao)
         {
@@ -226,9 +250,12 @@ int main()
         case 4:
             BuscaEmail(NomeCompleto, email, sexo, endereco, altura, vacina, id);
             break;
-            // case 5:
-            //     ImprimirUsuarios(NomeCompleto, email, sexo, endereco, altura, vacina, id);
-            //     break;
+        case 5:
+            ImprimirUsuarios(NomeCompleto, email, sexo, endereco, altura, vacina, id);
+            break;
+        case 6:
+            BackupUsuario(NomeCompleto, email, sexo, endereco, altura, vacina, id, backupNomeCompleto, backupEmail, backupSexo, backupEndereco, backupAltura, backupVacina);
+            break;
         }
 
     } while (continuar);
