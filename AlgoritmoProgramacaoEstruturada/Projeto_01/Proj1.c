@@ -1,6 +1,3 @@
-// Setima etapa: Restauração dos dados dos usuarios
-/*Adicionei algumas correcoes do que pude observar. Para não me perder, alterei alguns nomes também*/
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
