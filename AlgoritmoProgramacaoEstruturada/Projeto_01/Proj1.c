@@ -1,5 +1,5 @@
-//Sexta etapa: Backup dos usuarios
-/*Ao que tudo indica deu certo*/
+//correção sexta etapa
+
 
 #include <stdio.h>
 #include <string.h>
@@ -218,8 +218,8 @@ void BackupUsuario(char NomeCompleto[][40], char email[][30], char sexo[][10], c
         strcpy(backupEmail[numUsuarios], email[numUsuarios]);
         strcpy(backupSexo[numUsuarios], sexo[numUsuarios]);
         strcpy(backupEndereco[numUsuarios], endereco[numUsuarios]);
-        backupAltura[i] = altura[i];
-        backupVacina[i] = vacina[i];
+        backupAltura[i] = altura[numUsuarios];
+        backupVacina[i] = vacina[numUsuarios];
     }
     printf("\nBackup concluido!:)\n\n");
 }
@@ -233,8 +233,8 @@ int main()
     do
     {
 
-        printf("\tSeja bem vindo ao menu!\n\n");
-        printf("\nInforme o que deseja realizar no programa:\n\n1 - Incluir usuarios\n2 - Editar usuarios\n3 - Excluir usuario\n4 - Econtrar usuario pelo email\n5 - Apresentar usuarios\n6 - Fazer backup dos usuarios\n\n");
+        printf("->\tSeja bem vindo ao menu!<-\n\n");
+        printf("\nInforme o que deseja realizar no programa:\n\n1 - Incluir usuarios\n2 - Editar usuarios\n3 - Excluir usuario\n4 - Econtrar usuario pelo email\n5 - Apresentar usuarios\n6 - Fazer backup dos usuarios\n7 - Restaurar os dados\n\n");
         scanf("%d", &opcao);
         switch (opcao)
         {
