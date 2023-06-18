@@ -12,7 +12,7 @@ int numeroUsuarios = 0;
 typedef struct
 {
     int id, vacina;
-    char NomeCompleto[40], email[30], sexo[10], endereco[50];
+    char nomeCompleto[40], email[30], sexo[10], endereco[50];
     double altura;
 } infoUsuario;
 infoUsuario usuario[1000];
@@ -20,7 +20,7 @@ infoUsuario usuario[1000];
 void Cadastro()
 {
     printf("\nInforme o NOME do usuario: ");
-    fgets(usuario[numeroUsuarios].NomeCompleto, 40, stdin);
+    fgets(usuario[numeroUsuarios].nomeCompleto, 40, stdin);
     fflush(stdin);
 
     getchar();
@@ -41,7 +41,7 @@ void Cadastro()
     printf("\nInforme o ENDERECO do usuario: ");
     fgets(usuario[numeroUsuarios].endereco, 50, stdin);
     fflush(stdin);
-    
+
     do
     {
         printf("\nInforme o ALTURA(metros) do usuario: ");
@@ -60,7 +60,59 @@ void Cadastro()
     printf("\nUsuario criado com id: %d\n\n", usuario[numeroUsuarios].id);
 
     numeroUsuarios++;
-    return 1;
+    return;
+}
+void EditarCadastro()
+{
+    int i, idProcurar, opcao;
+
+    printf("\tInforme o id do usuario, cujo, deseja realizar alteracoes:\n");
+    scanf("%d", &idProcurar);
+    fflush(stdin);
+    int index;
+
+    for (int i = 0; i < numUsuarios; i++)
+    {
+        if (usuario[numeroUsuarios].id == idProcurar)
+        {
+            index = i;
+            break;
+        }
+    }
+    printf("\tInforme qual dado deseja alterar: ");
+    printf("\n1 - Nome\n2 - Email\n3 - Sexo\n4 - Endereco\n5 - Altura\n6 - Vacina\n");
+    scanf("%d", &opcao);
+    fflush(stdin);
+    switch (opcao)
+    {
+    case 1:
+        printf("\nInforme o Nome correto: ");
+        fgets(usuario[index].nomeCompleto, 40, stdin);
+        break;
+    case 2:
+        printf("\nInforme o Email correto: ");
+        fgets(usuario[index].email, 30, stdin);
+        break;
+    case 3:
+        printf("\nInforme o Sexo correto: ");
+        fgets(usuario[index].sexo, 10, stdin);
+        break;
+    case 4:
+        printf("\nInforme o Endereco correto: ");
+        fgets(usuario[index].endereco, 50, stdin);
+        break;
+    case 5:
+        printf("\nInforme a Altura correta: ");
+        scanf("%lf", &usuario[index].altura);
+        break;
+    case 6:
+        printf("\nInforme o status correto da Vacina: ");
+        scanf("%d", &usuario[index].vacina);
+        break;
+    default:
+        printf("\nInforme uma opcao que seja valida!");
+    }
+    return;
 }
 int main()
 {
@@ -78,9 +130,9 @@ int main()
         case 1:
             Cadastro(usuario);
             break;
-            // case 2:
-            //     EditarCadastro(usuario);
-            //     break;
+        case 2:
+            EditarCadastro(usuario);
+            break;
             // case 3:
             //     ExcluirUsuario(usuario);
             //     break;
