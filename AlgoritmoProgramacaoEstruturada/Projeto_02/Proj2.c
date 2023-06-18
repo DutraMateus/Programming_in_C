@@ -18,6 +18,15 @@ typedef struct
 } infoUsuario;
 infoUsuario usuario[1000];
 
+typedef struct
+{
+    int id, vacina;
+    char nomeCompleto[40], email[30], sexo[10], endereco[50];
+    double altura;
+} backup;
+backup backupUsuarios[1000];
+
+
 void cadastro()
 {
     printf("\nInforme o NOME do usuario: ");
@@ -149,6 +158,77 @@ void excluirUsuario()
 
     return;
 }
+void buscaEmail() /*ERRO*/
+{
+    char emailBusca[30];
+    int index = -1;
+
+    printf("\nInforme o email do usuario que deseja encontrar:\n");
+    fgets(emailBusca, 30, stdin);
+    fflush(stdin);
+
+    getchar();
+
+    for (int i = 0; i < numeroUsuarios; i++)
+    {
+        if (strcmp(emailBusca, usuario[i].email) == 0)
+        {
+            index = i;
+            break;
+        }
+    }
+
+    if (index != -1)
+    {
+        printf("\nDados do usuario encontrado:\n");
+        printf("Nome completo: %s\n", usuario[index].nomeCompleto);
+        printf("Email: %s\n", usuario[index].email);
+        printf("Sexo: %s\n", usuario[index].sexo);
+        printf("Endereco: %s\n", usuario[index].endereco);
+        printf("Altura: %.2lf\n", usuario[index].altura);
+        printf("Vacina: %d\n", usuario[index].vacina);
+        printf("ID: %d", usuario[index].id);
+    }
+    else
+    {
+        printf("\nUsuario com o email %s nao encontrado.\n", emailBusca);
+    }
+
+    return;
+}
+void imprimirUsuario() /*ERRO: NAO IMPRIME NOME COMPLETO*/
+{
+
+    for (int i = 0; i < numeroUsuarios; i++)
+    {
+        printf("\nID: %d\n", usuario[i].id);
+        printf("\nNome completo: %s", usuario[i].nomeCompleto);
+        printf("\nEmail: %s", usuario[i].email);
+        printf("\nSexo: %s", usuario[i].sexo);
+        printf("\nEndereco: %s", usuario[i].endereco);
+        printf("\nAltura: %.2lf\n", usuario[i].altura);
+        printf("\nVacina: %d\n", usuario[i].vacina);
+    }
+
+    return;
+}
+void backupUsuario()
+{
+    for (int i = 0; i < numeroUsuarios; i++)
+    {
+        backupUsuarios[i].id = usuario[i].id;
+        backupUsuarios[i].vacina = usuario[i].vacina;
+        strcpy(backupUsuarios[i].nomeCompleto, usuario[i].nomeCompleto);
+        strcpy(backupUsuarios[i].email, usuario[i].email);
+        strcpy(backupUsuarios[i].sexo, usuario[i].sexo);
+        strcpy(backupUsuarios[i].endereco, usuario[i].endereco);
+        backupUsuarios[i].altura = usuario[i].altura;
+    }
+
+    printf("\nBackup concluido!\n\n");
+    return;
+}
+
 int main()
 {
     srand(time(NULL));
@@ -171,15 +251,15 @@ int main()
         case 3:
             excluirUsuario();
             break;
-            // case 4:
-            //     BuscaEmail(usuario);
-            //     break;
-            // case 5:
-            //     ImprimirUsuarios(usuario);
-            //     break;
-            // case 6:
-            //     BackupUsuario(usuario, backupNomeCompleto, backupEmail, backupSexo, backupEndereco, backupAltura, backupVacina);
-            //     break;
+        case 4:
+            buscaEmail();
+            break;
+        case 5:
+            imprimirUsuario();
+            break;
+        case 6:
+            backupUsuario();
+            break;
             // case 7:
             //     RestararDadosUsuarios(usuario, backupNomeCompleto, backupEmail, backupSexo, backupEndereco, backupAltura, backupVacina);
             //     break;
