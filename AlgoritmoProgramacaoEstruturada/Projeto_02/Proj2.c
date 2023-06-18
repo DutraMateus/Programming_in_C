@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
-int numUsuarios = 0;
+int numeroUsuarios = 0;
 
 int idUser()
 {
     return rand();
 }
-int numeroUsuarios = 0;
 
 typedef struct
 {
@@ -17,7 +18,7 @@ typedef struct
 } infoUsuario;
 infoUsuario usuario[1000];
 
-void Cadastro()
+void cadastro()
 {
     printf("\nInforme o NOME do usuario: ");
     fgets(usuario[numeroUsuarios].nomeCompleto, 40, stdin);
@@ -62,7 +63,7 @@ void Cadastro()
     numeroUsuarios++;
     return;
 }
-void EditarCadastro()
+void editarCadastro()
 {
     int i, idProcurar, opcao;
 
@@ -71,7 +72,7 @@ void EditarCadastro()
     fflush(stdin);
     int index;
 
-    for (int i = 0; i < numUsuarios; i++)
+    for (int i = 0; i < numeroUsuarios; i++)
     {
         if (usuario[numeroUsuarios].id == idProcurar)
         {
@@ -114,6 +115,40 @@ void EditarCadastro()
     }
     return;
 }
+void excluirUsuario()
+{
+    int idProcurar;
+    bool encontrar = false;
+    int index;
+
+    printf("\nInforme o id do usuario que deseja remover:\n");
+    scanf("%d", &idProcurar);
+
+    for (int i = 0; i < numeroUsuarios; i++)
+    {
+        if (idProcurar == usuario[i].id)
+        {
+            encontrar = true;
+            index = i;
+            break;
+        }
+    }
+    if (!encontrar)
+    {
+        printf("Usuario %d nao encontrado.\n", idProcurar);
+        return;
+    }
+
+    for (int i = index; i < numeroUsuarios - 1; i++)
+    {
+        usuario[i] = usuario[i + 1];
+    }
+    numeroUsuarios--;
+
+    printf("Usuario %d excluido!\n", idProcurar);
+
+    return;
+}
 int main()
 {
     srand(time(NULL));
@@ -128,14 +163,14 @@ int main()
         switch (opcao)
         {
         case 1:
-            Cadastro(usuario);
+            cadastro();
             break;
         case 2:
-            EditarCadastro(usuario);
+            editarCadastro();
             break;
-            // case 3:
-            //     ExcluirUsuario(usuario);
-            //     break;
+        case 3:
+            excluirUsuario();
+            break;
             // case 4:
             //     BuscaEmail(usuario);
             //     break;
@@ -152,6 +187,6 @@ int main()
             //     printf("\nSelecione uma das opcoes informadas (1 a 6)");
             // }
         }
-    } while (continuar);
+    } while (continuar != 8);
     return 0;
 }
