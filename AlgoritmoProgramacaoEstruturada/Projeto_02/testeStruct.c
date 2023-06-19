@@ -193,13 +193,37 @@ void buscaEmail() /*ERRO*/
 
     return;
 }
-void imprimirUsuario() /*ERRO: NAO IMPRIME NOME COMPLETO*/
-{
+// void imprimirUsuario() /*ERRO: NAO IMPRIME NOME COMPLETO*/
+// {
 
+//     for (int i = 0; i < numeroUsuarios; i++)
+//     {
+//         printf("\nID: %d\n", usuario[i].id);
+//         printf("\nNome completo: %s", usuario[i].nomeCompleto);
+//         printf("\nEmail: %s", usuario[i].email);
+//         printf("\nSexo: %s", usuario[i].sexo);
+//         printf("\nEndereco: %s", usuario[i].endereco);
+//         printf("\nAltura: %.2lf\n", usuario[i].altura);
+//         printf("\nVacina: %d\n", usuario[i].vacina);
+//     }
+
+//     return;
+// }
+void imprimirUsuario()
+{
     for (int i = 0; i < numeroUsuarios; i++)
     {
         printf("\nID: %d\n", usuario[i].id);
-        printf("\nNome completo: %s", usuario[i].nomeCompleto);
+        
+        // Imprimir o nome completo sem o caractere de nova linha
+        printf("\nNome completo: ");
+        int j = 0;
+        while (usuario[i].nomeCompleto[j] != '\n' && usuario[i].nomeCompleto[j] != '\0')
+        {
+            printf("%c", usuario[i].nomeCompleto[j]);
+            j++;
+        }
+        
         printf("\nEmail: %s", usuario[i].email);
         printf("\nSexo: %s", usuario[i].sexo);
         printf("\nEndereco: %s", usuario[i].endereco);
@@ -209,8 +233,9 @@ void imprimirUsuario() /*ERRO: NAO IMPRIME NOME COMPLETO*/
 
     return;
 }
-void backupUsuario() // aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-{ 
+
+// void backupUsuario() // aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+// { 
     // {
     //     for (int i = 0; i < numeroUsuarios; i++)
     //     {
@@ -224,13 +249,13 @@ void backupUsuario() // aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     //     printf("\nBackup concluido!:)\n\n");
     //     return;
     // }
-    for (int i = 0; i < numeroUsuarios; i++)
-    {
-        backup[i] = usuario[i];
-    }
-    printf("\nBackup concluido!\n\n");
-    return;
-}
+//     for (int i = 0; i < numeroUsuarios; i++)
+//     {
+//         backup[i] = usuario[i];
+//     }
+//     printf("\nBackup concluido!\n\n");
+//     return;
+// }
 int main()
 {
     srand(time(NULL));

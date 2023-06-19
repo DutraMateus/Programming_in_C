@@ -25,7 +25,13 @@ typedef struct
     double altura;
 } backup;
 backup backupUsuarios[1000];
-
+typedef struct
+{
+    int id, vacina;
+    char nomeCompleto[40], email[30], sexo[10], endereco[50];
+    double altura;
+} restaurar;
+restaurar restaurarDados[1000];
 
 void cadastro()
 {
@@ -228,6 +234,22 @@ void backupUsuario()
     printf("\nBackup concluido!\n\n");
     return;
 }
+void restaurarDadosUsuarios()
+{
+
+    for (int i = 0; i < numeroUsuarios; i++)
+    {
+        strcpy(usuario[i].nomeCompleto, backupUsuarios[i].nomeCompleto);
+        strcpy(usuario[i].email, backupUsuarios[i].email);
+        strcpy(usuario[i].sexo, backupUsuarios[i].sexo);
+        strcpy(usuario[i].endereco, backupUsuarios[i].endereco);
+        usuario[i].altura = backupUsuarios[i].altura;
+        usuario[i].vacina = backupUsuarios[i].vacina;
+    }
+    printf("\nRestauracao concluido!:]\n\n");
+
+    return;
+}
 
 int main()
 {
@@ -260,12 +282,11 @@ int main()
         case 6:
             backupUsuario();
             break;
-            // case 7:
-            //     RestararDadosUsuarios(usuario, backupNomeCompleto, backupEmail, backupSexo, backupEndereco, backupAltura, backupVacina);
-            //     break;
-            // default:
-            //     printf("\nSelecione uma das opcoes informadas (1 a 6)");
-            // }
+        case 7:
+            restaurarDadosUsuarios();
+            break;
+        default:
+            printf("\nSelecione uma das opcoes informadas (1 a 6)");
         }
     } while (continuar != 8);
     return 0;
