@@ -74,7 +74,7 @@ Usuario *cadastro(Usuario *lista)
         return user;
     }
 }
-Usuario *editarCadastro(Usuario *lista) // ERRO
+Usuario *editarCadastro(Usuario *lista)
 {
     Usuario *auxiliar;
     int idProcurar, opcao;
@@ -83,12 +83,8 @@ Usuario *editarCadastro(Usuario *lista) // ERRO
 
     printf("\tInforme o id do usuario que deseja realizar alteracoes:\n");
     scanf("%d", &idProcurar);
-    getchar(); // Consumir o caractere de nova linha residual
-
-    char idStr[10];
-    fgets(idStr, sizeof(idStr), stdin);
-    idStr[strcspn(idStr, "\n")] = '\0';
-    idProcurar = atoi(idStr);
+    getchar();
+    
 
     for (auxiliar = lista; auxiliar != NULL; auxiliar = auxiliar->ponteiro)
     {
@@ -106,46 +102,88 @@ Usuario *editarCadastro(Usuario *lista) // ERRO
         printf("\nInforme qual dado deseja alterar: ");
         printf("\n1 - Nome\n2 - Email\n3 - Sexo\n4 - Endereco\n5 - Altura\n6 - Vacina\n");
         scanf("%d", &opcao);
-        getchar(); // Consumir o caractere de nova linha residual
 
         switch (opcao)
         {
-        case 1:
-            printf("\nInforme o Nome correto: ");
-            fgets(auxiliar->nomeCompleto, 30, stdin);
-            break;
-        case 2:
-            printf("\nInforme o Email correto: ");
-            fgets(auxiliar->email, 30, stdin);
-            break;
-        case 3:
-            printf("\nInforme o Sexo correto: ");
-            fgets(auxiliar->sexo, 10, stdin);
-            break;
-        case 4:
-            printf("\nInforme o Endereco correto: ");
-            fgets(auxiliar->endereco, 50, stdin);
-            break;
-        case 5:
-            printf("\nInforme a Altura correta: ");
-            scanf("%lf", &auxiliar->altura);
-            break;
-        case 6:
-            printf("\nInforme o status correto da Vacina: ");
-            scanf("%d", &auxiliar->vacina);
-            break;
-        default:
-            printf("\nOpcao invalida!");
+            case 1:
+                printf("\nInforme o Nome correto: ");
+                fgets(auxiliar->nomeCompleto, 30, stdin);
+                break;
+            case 2:
+                printf("\nInforme o Email correto: ");
+                fgets(auxiliar->email, 30, stdin);
+                break;
+            case 3:
+                printf("\nInforme o Sexo correto: ");
+                fgets(auxiliar->sexo, 10, stdin);
+                break;
+            case 4:
+                printf("\nInforme o Endereco correto: ");
+                fgets(auxiliar->endereco, 50, stdin);
+                break;
+            case 5:
+                printf("\nInforme a Altura correta: ");
+                scanf("%lf", &auxiliar->altura);
+                break;
+            case 6:
+                printf("\nInforme o status correto da Vacina: ");
+                scanf("%d", &auxiliar->vacina);
+                break;
+            default:
+                printf("\nOpcao invalida!");
         }
     }
     else
     {
         printf("Usuario nao encontrado.\n");
     }
-
+    
     return lista;
 }
+// Usuario *excluirUsuario(Usuario *lista)
+// {
+//     char escolha[3], email[30];
+//     Usuario *auxiliar;
+//     Usuario *anterior; 
 
+//     printf("\nInforme o id do usuario que deseja remover:\n");
+//     fgets(email, 30, stdin);
+
+//     for (auxiliar = lista; auxiliar != NULL; auxiliar = auxiliar->ponteiro)
+//     {
+//         int idProcurar;
+//         bool encontrar = false;
+//         int index;
+
+//         printf("\nInforme o id do usuario que deseja remover:\n");
+//         scanf("%d", &idProcurar);
+
+//         for (int i = 0; i < numeroUsuarios; i++)
+//         {
+//             if (idProcurar == auxiliar->id)
+//             {
+//                 encontrar = true;
+//                 index = i;
+//                 break;
+//             }
+//         }
+//         if (!encontrar)
+//         {
+//             printf("Usuario %d nao encontrado.\n", idProcurar);
+//             return;
+//         }
+
+//         for (int i = index; i < numeroUsuarios - 1; i++)
+//         {
+//             usuario[i] = usuario[i + 1];
+//         }
+//         numeroUsuarios--;
+
+//         printf("Usuario %d excluido!\n", idProcurar);
+
+//         return;
+//     }
+// }
 int main()
 {
     srand(time(NULL));
@@ -166,7 +204,7 @@ int main()
             editarCadastro(lista);
             break;
         // case 3:
-        //     excluirUsuario();
+        //     excluirUsuario(lista);
         //     break;
         // case 4:
         //     imprimirUsuario();
