@@ -70,7 +70,6 @@ Usuario *cadastro(Usuario *lista)
 
         numeroUsuarios++;
         user->ponteiro = lista;
-        lista = user;
         return user;
     }
 }
@@ -131,15 +130,16 @@ Usuario *editarCadastro(Usuario *lista) // ERRO
         default:
             printf("\nOpcao invalida!");
         }
+        return lista;
     }
     else
     {
-        printf("Usuario nao encontrado.\n");
+        printf("\nUsuario nao encontrado.\n");
     }
 
     return lista;
 }
-Usuario *excluirUsuario(Usuario *lista) //ERRO
+Usuario *excluirUsuario(Usuario *lista) // ERRO
 {
     char email[30];
     Usuario *auxiliar;
@@ -153,19 +153,39 @@ Usuario *excluirUsuario(Usuario *lista) //ERRO
 
         if (strcmp(auxiliar->email, email) == 0)
         {
-            printf("ID: %d\n", auxiliar->id);
-            printf("Nome: %s\n", auxiliar->nomeCompleto);
-            printf("Email: %s\n", auxiliar->email);
-            printf("Sexo: %s\n", auxiliar->sexo);
-            printf("Endereco: %s\n", auxiliar->endereco);
-            printf("Altura: %.2f\n", auxiliar->altura);
-            printf("Vacina: %d\n", auxiliar->vacina);
+            printf("\nID: %d\n", auxiliar->id);
+            printf("\nNome: %s\n", auxiliar->nomeCompleto);
+            printf("\nEmail: %s\n", auxiliar->email);
+            printf("\nSexo: %s\n", auxiliar->sexo);
+            printf("\nEndereco: %s\n", auxiliar->endereco);
+            printf("\nAltura: %.2f\n", auxiliar->altura);
+            printf("\nVacina: %d\n", auxiliar->vacina);
+
+            free(auxiliar);
+
+            printf("\nUsuario excluido!\n");
+            return lista;
         }
 
         else
         {
             printf("Cadastro nao localizado.");
+            return lista;
         }
+    }
+}
+void imprimirUsuario(Usuario *lista) //ERRO
+{
+    Usuario *auxiliar;
+    for (auxiliar = lista; auxiliar != NULL; auxiliar = auxiliar->ponteiro)
+    {
+        printf("\nID: %d\n", auxiliar->id);
+        printf("\nNome: %s\n", auxiliar->nomeCompleto);
+        printf("\nEmail: %s\n", auxiliar->email);
+        printf("\nSexo: %s\n", auxiliar->sexo);
+        printf("\nEndereco: %s\n", auxiliar->endereco);
+        printf("\nAltura: %.2f\n", auxiliar->altura);
+        printf("\nVacina: %d\n", auxiliar->vacina);
     }
 }
 int main()
@@ -190,9 +210,9 @@ int main()
         case 3:
             excluirUsuario(lista);
             break;
-        // case 4:
-        //     imprimirUsuario();
-        //     break;
+        case 4:
+            imprimirUsuario(lista);
+            break;
         default:
             printf("\nSelecione uma das opcoes informadas (1 a 6)");
         }

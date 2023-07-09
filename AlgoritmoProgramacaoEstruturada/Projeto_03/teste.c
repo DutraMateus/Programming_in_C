@@ -1,40 +1,5 @@
-// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA não sei fazer usando alocação dinamica, fiz utilizando a lógica que entendi de outro aluno. Infelizmente :(
-// adivinha... deu ruim tbm
-//
+// Não sei o que fazer pra corrigir tudo isso, nem o GPT tá conseguindo me ajudar nessa bomba
 
-// void excluirUsuario()
-//     int idProcurar;
-//     bool encontrar = false;
-//     int index;
-
-//     printf("\nInforme o id do usuario que deseja remover:\n");
-//     scanf("%d", &idProcurar);
-
-//     for (int i = 0; i < numeroUsuarios; i++)
-//     {
-//         if (idProcurar == usuario[i].id)
-//         {
-//             encontrar = true;
-//             index = i;
-//             break;
-//         }
-//     }
-//     if (!encontrar)
-//     {
-//         printf("Usuario %d nao encontrado.\n", idProcurar);
-//         return;
-//     }
-
-//     for (int i = index; i < numeroUsuarios - 1; i++)
-//     {
-//         usuario[i] = usuario[i + 1];
-//     }
-//     numeroUsuarios--;
-
-//     printf("Usuario %d excluido!\n", idProcurar);
-
-//     return;
-// }
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -107,7 +72,6 @@ Usuario *cadastro(Usuario *lista)
 
         numeroUsuarios++;
         user->ponteiro = lista;
-        lista = user;
         return user;
     }
 }
@@ -168,114 +132,64 @@ Usuario *editarCadastro(Usuario *lista) // ERRO
         default:
             printf("\nOpcao invalida!");
         }
+        return lista;
     }
     else
     {
-        printf("Usuario nao encontrado.\n");
+        printf("\nUsuario nao encontrado.\n");
     }
 
     return lista;
 }
-// Usuario *excluirUsuario(Usuario *lista)
-// {
-//     char email[30];
-//     Usuario * auxiliar = lista;
-//     Usuario * anterior = NULL;
-
-//     printf("\nInforme o email do usuario que deseja excluir:\n");
-//     fgets(email, 30, stdin);
-
-//     for (auxiliar = lista; auxiliar != NULL; auxiliar = auxiliar->ponteiro)
-//     {
-
-//         if (strcmp(auxiliar->email, email) == 0)
-//         {
-//             printf("ID: %d\n", auxiliar->id);
-//             printf("Nome: %s\n", auxiliar->nomeCompleto);
-//             printf("Email: %s\n", auxiliar->email);
-//             printf("Sexo: %s\n", auxiliar->sexo);
-//             printf("Endereco: %s\n", auxiliar->endereco);
-//             printf("Altura: %.2f\n", auxiliar->altura);
-//             printf("Vacina: %d\n", auxiliar->vacina);
-//         }
-
-//         else
-//         {
-//             printf("Cadastro nao localizado.");
-//         }
-//     }
-// }
-// Usuario *excluirCadastro(Usuario *lista)
-// {
-//     char email[30];
-//     Usuario *auxiliar = lista;
-//     Usuario *anterior = NULL;
-
-//     printf("\nInforme o email do usuario que deseja excluir:\n");
-//     fgets(email, 30, stdin);
-
-//     while (auxiliar != NULL)
-//     {
-//         if (strcmp(auxiliar->email, email) == 0)
-//         {
-//             if (anterior == NULL)
-//             {
-
-//                 lista = auxiliar->ponteiro;
-//             }
-//             else
-//             {
-
-//                 anterior->ponteiro = auxiliar->ponteiro;
-//             }
-
-//             free(auxiliar);
-//             printf("Usuario excluido com sucesso.\n");
-//             return lista;
-//         }
-
-//         anterior = auxiliar;
-//         auxiliar = auxiliar->ponteiro;
-//     }
-
-//     printf("Usuario nao encontrado.\n");
-//     return lista;
-// }
-Usuario *excluirCadastro(Usuario *lista)
+Usuario *excluirUsuario(Usuario *lista) // ERRO
 {
     char email[30];
-    Usuario *auxiliar = lista;
-    Usuario *anterior = NULL;
+    Usuario *auxiliar;
+    Usuario *anterior;
 
     printf("\nInforme o email do usuario que deseja excluir:\n");
     fgets(email, 30, stdin);
 
-    while (auxiliar != NULL)
+    for (auxiliar = lista; auxiliar != NULL; auxiliar = auxiliar->ponteiro)
     {
+
         if (strcmp(auxiliar->email, email) == 0)
         {
-            if (anterior == NULL)
-            {
-                lista = auxiliar->ponteiro;
-            }
-            else
-            {
-                anterior->ponteiro = auxiliar->ponteiro;
-            }
+            printf("\nID: %d\n", auxiliar->id);
+            printf("\nNome: %s\n", auxiliar->nomeCompleto);
+            printf("\nEmail: %s\n", auxiliar->email);
+            printf("\nSexo: %s\n", auxiliar->sexo);
+            printf("\nEndereco: %s\n", auxiliar->endereco);
+            printf("\nAltura: %.2f\n", auxiliar->altura);
+            printf("\nVacina: %d\n", auxiliar->vacina);
 
             free(auxiliar);
-            printf("Usuario excluido com sucesso.\n");
+
+            printf("\nUsuario excluido!\n");
             return lista;
         }
 
-        anterior = auxiliar;
-        auxiliar = auxiliar->ponteiro;
+        else
+        {
+            printf("Cadastro nao localizado.");
+            return lista;
+        }
     }
-
-    printf("Usuario nao encontrado.\n");
-    return lista;
 }
-
+void imprimirUsuario(Usuario *lista)
+{
+    Usuario *auxiliar;
+    for (auxiliar = lista; auxiliar != NULL; auxiliar = auxiliar->ponteiro)
+    {
+        printf("\nID: %d\n", auxiliar->id);
+        printf("\nNome: %s\n", auxiliar->nomeCompleto);
+        printf("\nEmail: %s\n", auxiliar->email);
+        printf("\nSexo: %s\n", auxiliar->sexo);
+        printf("\nEndereco: %s\n", auxiliar->endereco);
+        printf("\nAltura: %.2f\n", auxiliar->altura);
+        printf("\nVacina: %d\n", auxiliar->vacina);
+    }
+}
 int main()
 {
     srand(time(NULL));
@@ -298,9 +212,9 @@ int main()
         case 3:
             excluirUsuario(lista);
             break;
-        // case 4:
-        //     imprimirUsuario();
-        //     break;
+        case 4:
+            imprimirUsuario(lista);
+            break;
         default:
             printf("\nSelecione uma das opcoes informadas (1 a 6)");
         }
