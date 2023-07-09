@@ -74,7 +74,7 @@ Usuario *cadastro(Usuario *lista)
         return user;
     }
 }
-Usuario *editarCadastro(Usuario *lista)
+Usuario *editarCadastro(Usuario *lista) //ERRO
 {
     Usuario *auxiliar;
     int idProcurar, opcao;
