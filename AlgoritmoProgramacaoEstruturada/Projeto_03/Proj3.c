@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <time.h>
 #include <math.h>
 
@@ -25,7 +26,6 @@ Usuario *comecar()
 }
 Usuario *cadastro(Usuario *lista)
 {
-
     Usuario *user = (Usuario *)malloc(sizeof(Usuario));
     {
         printf("\nInforme o NOME do usuario: ");
@@ -69,15 +69,88 @@ Usuario *cadastro(Usuario *lista)
         printf("\nUsuario criado com id: %d\n\n", user->id);
 
         numeroUsuarios++;
-        return;
+        user->ponteiro = lista;
+        lista = user;
+        return user;
     }
+}
+Usuario *editarCadastro(Usuario *lista) // ERRO
+{
+    Usuario *auxiliar;
+    int idProcurar, opcao;
+    int contador = 0, tamanho = 0;
+    bool encontrado = false;
+
+    printf("\tInforme o id do usuario que deseja realizar alteracoes:\n");
+    scanf("%d", &idProcurar);
+    getchar(); // Consumir o caractere de nova linha residual
+
+    char idStr[10];
+    fgets(idStr, sizeof(idStr), stdin);
+    idStr[strcspn(idStr, "\n")] = '\0';
+    idProcurar = atoi(idStr);
+
+    for (auxiliar = lista; auxiliar != NULL; auxiliar = auxiliar->ponteiro)
+    {
+        tamanho++;
+        if (auxiliar->id == idProcurar)
+        {
+            encontrado = true;
+            break;
+        }
+        contador++;
+    }
+
+    if (encontrado)
+    {
+        printf("\nInforme qual dado deseja alterar: ");
+        printf("\n1 - Nome\n2 - Email\n3 - Sexo\n4 - Endereco\n5 - Altura\n6 - Vacina\n");
+        scanf("%d", &opcao);
+        getchar(); // Consumir o caractere de nova linha residual
+
+        switch (opcao)
+        {
+        case 1:
+            printf("\nInforme o Nome correto: ");
+            fgets(auxiliar->nomeCompleto, 30, stdin);
+            break;
+        case 2:
+            printf("\nInforme o Email correto: ");
+            fgets(auxiliar->email, 30, stdin);
+            break;
+        case 3:
+            printf("\nInforme o Sexo correto: ");
+            fgets(auxiliar->sexo, 10, stdin);
+            break;
+        case 4:
+            printf("\nInforme o Endereco correto: ");
+            fgets(auxiliar->endereco, 50, stdin);
+            break;
+        case 5:
+            printf("\nInforme a Altura correta: ");
+            scanf("%lf", &auxiliar->altura);
+            break;
+        case 6:
+            printf("\nInforme o status correto da Vacina: ");
+            scanf("%d", &auxiliar->vacina);
+            break;
+        default:
+            printf("\nOpcao invalida!");
+        }
+    }
+    else
+    {
+        printf("Usuario nao encontrado.\n");
+    }
+
+    return lista;
 }
 
 int main()
 {
     srand(time(NULL));
-    int opcao, continuar;
-    Usuario *lista;
+    int opcao;
+    Usuario *lista = comecar();
     do
     {
 
@@ -89,9 +162,9 @@ int main()
         case 1:
             cadastro(lista);
             break;
-        // case 2:
-        //     editarCadastro();
-        //     break;
+        case 2:
+            editarCadastro(lista);
+            break;
         // case 3:
         //     excluirUsuario();
         //     break;
@@ -101,6 +174,6 @@ int main()
         default:
             printf("\nSelecione uma das opcoes informadas (1 a 6)");
         }
-    } while (continuar != 8);
+    } while (opcao != 8);
     return 0;
 }
